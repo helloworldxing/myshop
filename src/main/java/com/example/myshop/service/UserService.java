@@ -15,6 +15,13 @@ public class UserService {
     }
 
     public User loginUser(User user) {
-        return userRepository.findByName(user.getName()).orElse(null);
+        User storedUser = userRepository.findByName(user.getName()).orElse(null);
+        if (storedUser != null && storedUser.getPassword().equals(user.getPassword())) {
+            // 密码匹配
+            return storedUser;
+        } else {
+            // 用户名不存在或密码不匹配
+            return null;
+        }
     }
 }
