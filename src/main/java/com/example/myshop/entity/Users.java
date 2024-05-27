@@ -6,16 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Entity
 @Data
-public class Products {
+@Entity
+public class Users {
 
     @Id
     private Integer id;
 
     private String name;
-    private Double price;
-    private String description;
-
+    private String password;
 
 }

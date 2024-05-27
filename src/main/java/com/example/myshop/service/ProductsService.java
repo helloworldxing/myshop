@@ -1,29 +1,32 @@
 package com.example.myshop.service;
 
+
 import com.example.myshop.entity.Products;
 import com.example.myshop.repository.ProductsRepository;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductsService {
+
     @Autowired
     private ProductsRepository productsRepository;
 
-    public Products addProduct(Products product) {
-        return productsRepository.save(product);
+    public void addProduct(String name,Double price) {
+        Products products = new Products();
+        products.setName(name);
+        products.setPrice(price);
+        productsRepository.save(products);
     }
 
-    public void removeProduct(Long id) {
-        productsRepository.deleteById(id);
+
+    public List<Products> findAllProducts() {
+        return productsRepository.findAll();
     }
 
-    public Products getProduct(Long id) {
+    public Products findProductById(Integer id) {
         return productsRepository.findById(id).orElse(null);
-    }
-
-    public Products updateProduct(Products product) {
-        return productsRepository.save(product);
     }
 }
